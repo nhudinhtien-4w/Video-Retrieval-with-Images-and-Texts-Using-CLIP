@@ -33,7 +33,7 @@ Truy cập vào: http://localhost:8000
 - database\: Cấu hình và scripts cho Milvus/Docker.
 - utils\: Các module tiện ích (FAISS, Elasticsearch, LLM, ...).
 - scripts\: Các script hỗ trợ (ETL, download data, ...).
-- 	emplates\ & static\: Giao diện Web.
+- 	emplates & static\: Giao diện Web.
 
 ##  Notes
 - Hệ thống mặc định đang sử dụng CLIP ViT-L/14, nếu muốn sử dụng model khác, hãy tinh chỉnh trong file config.py.
