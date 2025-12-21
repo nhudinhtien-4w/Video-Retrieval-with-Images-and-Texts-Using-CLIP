@@ -28,12 +28,12 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 Truy cập vào: http://localhost:8000
 
 ##  Cấu trúc dự án
-- \main.py\: Entry point của ứng dụng FastAPI.
-- \configs.py\: Các cấu hình hệ thống.
-- \database/\: Cấu hình và scripts cho Milvus/Docker.
-- \utils/\: Các module tiện ích (FAISS, Elasticsearch, LLM, ...).
-- \scripts/\: Các script hỗ trợ (ETL, download data, ...).
-- \	emplates/\ & \static/\: Giao diện Web.
+- main.py\: Entry point của ứng dụng FastAPI.
+- configs.py\: Các cấu hình hệ thống.
+- database\: Cấu hình và scripts cho Milvus/Docker.
+- utils\: Các module tiện ích (FAISS, Elasticsearch, LLM, ...).
+- scripts\: Các script hỗ trợ (ETL, download data, ...).
+- 	emplates\ & static\: Giao diện Web.
 
 ##  Notes
 - Hệ thống mặc định đang sử dụng CLIP ViT-L/14, nếu muốn sử dụng model khác, hãy tinh chỉnh trong file config.py.
