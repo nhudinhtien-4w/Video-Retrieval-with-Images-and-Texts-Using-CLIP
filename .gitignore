@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ir_venv/
+.env
+
+# VS Code
+.vscode/
+
+# Data (Heavy files)
+data/bin/
+data/clip_frame/
+data/mid_frame/
+database/volumes/
+*.pth
+*.bin
+*.pkl
+
+# Large repos
+unilm/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db

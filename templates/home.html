@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team 07</title>
+  <link rel="icon" href="/static/img/favicon.svg" type="image/svg+xml">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/styles.css" rel="stylesheet">
+  <script src="/static/js/resizer.js" defer></script>
+  <script src="/static/js/chat.js" defer></script>
+</head>
+
+<body>
+  <!-- Chat Widget -->
+  <div class="chat-widget">
+    <div class="chat-button" id="chatButton">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="white" />
+      </svg>
+    </div>
+    <div class="chat-box" id="chatBox">
+      <div class="chat-header">
+        <div class="chat-controls">
+          <select id="chatHistorySelect">
+            <option value="default">Default Chat</option>
+          </select>
+          <button id="newChatBtn" class="new-chat-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="white" />
+            </svg>
+          </button>
+        </div>
+        <button class="close-chat" id="closeChat">✕</button>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input">
+        <input type="text" id="messageInput" placeholder="Type here...">
+        <button id="sendMessage">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="white" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <header>
+    <div class="header-title">
+      <h5><b>Team 07 - IR</b></h5>
+    </div>
+    <nav aria-label="Page navigation" class="header-pagination">
+      <ul class="pagination justify-content-center m-0">
+        <!-- First and Previous buttons -->
+        {% if page > 1 %}
+        <li class="page-item"><a class="page-link" id="firstPage">&lt;&lt;</a></li>
+        <li class="page-item"><a class="page-link" id="prevPage">&lt;</a></li>
+        {% else %}
+        <li class="page-item disabled"><a class="page-link">&lt;&lt;</a></li>
+        <li class="page-item disabled"><a class="page-link">&lt;</a></li>
+        {% endif %}
+
+        <!-- Current page indicator -->
+        <li class="page-item disabled"><a class="page-link" id="counterpage">{{ page }}/{{ num_pages }}</a></li>
+
+        <!-- Next and Last buttons -->
+        {% if page < num_pages %} <li class="page-item"><a class="page-link" id="nextPage">&gt;</a></li>
+          <li class="page-item"><a class="page-link" id="lastPage">&gt;&gt;</a></li>
+          {% else %}
+          <li class="page-item disabled"><a class="page-link">&gt;</a></li>
+          <li class="page-item disabled"><a class="page-link">&gt;&gt;</a></li>
+          {% endif %}
+      </ul>
+    </nav>
+  </header>
+  <section class="containerall">
+    <div class="search_container">
+      <div class="search_complex">
+        <button class="search_btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24" id="search">
+            <g>
+              <path
+                d="m20.71 19.29-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z">
+              </path>
+            </g>
+          </svg> Search
+        </button>
+        <div class="toolbar">
+          <ul class="mlt-search">
+            <li id="text">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 16" id="text">
+                <path
+                  d="M13.62 9.08L12.1 3.66h-.06l-1.5 5.42h3.08zM5.7 10.13S4.68 6.52 4.53 6.02h-.08l-1.13 4.11H5.7zM17.31 14h-2.25l-.95-3.25h-4.07L9.09 14H6.84l-.69-2.33H2.87L2.17 14H0l3.3-9.59h2.5l2.17 6.34L10.86 2h2.52l3.94 12h-.01z">
+                </path>
+              </svg>
+            </li>
+            <li id="image">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="image">
+                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+              </svg>
+            </li>
+            <li id="object">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="object">
+                <path
+                  d="M5.072 0A5.061 5.061 0 0 0 0 5.072v13.856A5.061 5.061 0 0 0 5.072 24h13.856A5.061 5.061 0 0 0 24 18.928V5.072A5.061 5.061 0 0 0 18.928 0H5.072zM6 5h7v3H6V5zm8 0h5v6h-5V5zm-8 6h7v8H6v-8zm8 1h5v4h-5v-4z">
+                </path>
+              </svg>
+            </li>
+          </ul>
+          <div class="textRelated">
+            Categories:<br>
+            <input class="checkbox-item" type="checkbox" id="Clip"> Clip <br>
+            <input class="checkbox-item" type="checkbox" id="IC"> Image Captioning <br>
+            <input class="checkbox-item" type="checkbox" id="MultiContext"> Multi-Context KIS <br>
+            <select class="custom-select mr-sm-2" id="faiss-select">
+              <option value="1">bigg14_laion</option>
+              <option value="2">bigg14_datacomp</option>
+              <option value="3">g14_laion</option>
+              <option value="4">h14_quickgelu</option>
+              <option value="5">h14_apple</option>
+              <option value="6">l14</option>
+              <option value="7">b32</option>
+            </select>
+            <div id="singleContextInput">
+              Search text:
+              <textarea type="text" id="textInput"></textarea>
+            </div>
+            <div id="imageSearchInput" style="display: none;">
+              <div style="margin-bottom: 10px;">
+                <label for="imageFileInput" style="cursor: pointer; padding: 8px 16px; background-color: #007bff; color: white; border-radius: 4px; display: inline-block;">
+                  📁 Choose Image
+                </label>
+                <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+              </div>
+              <div id="imagePasteArea" style="border: 2px dashed #ccc; padding: 20px; text-align: center; border-radius: 4px; min-height: 150px; cursor: pointer;">
+                <p>📋 Paste image here (Ctrl+V)</p>
+                <img id="imagePreview" style="max-width: 100%; max-height: 200px; display: none; margin-top: 10px;">
+              </div>
+            </div>
+            <div id="multiContextInputs" style="display: none;">
+            <div>
+              Context 1:<br>
+              <textarea id="context1" placeholder="Mô tả cảnh trong frame 1..."></textarea>
+            </div>
+
+            <div>
+              Context 2:<br>
+              <textarea id="context2" placeholder="Mô tả cảnh trong frame 2..."></textarea>
+            </div>
+
+            <div>
+              Context 3:<br>
+              <textarea id="context3" placeholder="Mô tả cảnh trong frame 3..."></textarea>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="img_container">
+      <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <!-- Display images in a grid layout -->
+          <div class="carousel-item active">
+            <div class="image-grid">
+              {% for item in data %}
+              <div class="image-container">
+                <img src="{{ item.imgpath }}" alt="Image {{ item.id }}" data="{{item.id}}" class="carousel-image">
+                <div class="image-controls">
+                  <button class="IR_Btn" data="{{item.id}}" alt="{{ item.imgpath }}">IS</button>
+                  <button class="add-to-chat-btn"
+                    onclick="addImageToChat('{{ item.imgpath }}', '{{ item.imgpath.split('/')[-2] }}', '{{ item.imgpath.split('/')[-1] }}')">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <button id="helpButton">?</button>
+      <div id="overlay"></div>
+
+      <div id="modalBox">
+        <button id="closeButton">&times;</button>
+        <div class="slide-1">
+          <h2><b>Shortcut</b></h2>
+          <p>press <b>Ctrl + "3"</b> for Clip (text embedding)<br>
+            press <b>Ctrl + "4"</b> for Clip (from panel)<br>
+            press <b>Ctrl + "5"</b> for Image Captioning (villa)<br>
+            press <b>Ctrl + "6"</b> for Glip (text embedding)<br>
+            press <b>Ctrl + "7"</b> to open Object search<br>
+            press <b>Ctrl + up/down arrow</b> to change Faiss<br>
+            press <b>Ctrl + left/right arrow</b> to change page<br>
+            press <b>Ctrl + Space</b> for add rows in Object search<br>
+            press <b>Ctrl + "Enter"</b> to search</p>
+        </div>
+        <div class="slide-2"></div>
+        <div class="slide-3">
+          <div class="toolbar_object">
+            <h2>Object search</h2>
+          </div>
+          <div class="form-container">
+            <div class="form-header">
+              <div>Quantity</div>
+              <div>Object name</div>
+              <div>Color</div>
+            </div>
+            <ul class="form-row">
+            </ul>
+            <div class="toolbar_object">
+              <button class="search_btn"
+                style="width:100px; background: none; color: #343A40; border: 1px solid #343A40">Search</button>
+              <button id="addObject">Add object query </button>
+              <button id="clear" style="width: 50px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+                  <path
+                    d="M 49 1 C 47.34 1 46 2.34 46 4 C 46 5.66 47.34 7 49 7 L 79 7 C 80.66 7 82 5.66 82 4 C 82 2.34 80.66 1 79 1 L 49 1 z M 24 15 C 16.83 15 11 20.83 11 28 C 11 35.17 16.83 41 24 41 L 101 41 L 101 104 C 101 113.37 93.37 121 84 121 L 44 121 C 34.63 121 27 113.37 27 104 L 27 52 C 27 50.34 25.66 49 24 49 C 22.34 49 21 50.34 21 52 L 21 104 C 21 116.68 31.32 127 44 127 L 84 127 C 96.68 127 107 116.68 107 104 L 107 40.640625 C 112.72 39.280625 117 34.14 117 28 C 117 20.83 111.17 15 104 15 L 24 15 z M 24 21 L 104 21 C 107.86 21 111 24.14 111 28 C 111 31.86 107.86 35 104 35 L 24 35 C 20.14 35 17 31.86 17 28 C 17 24.14 20.14 21 24 21 z M 50 55 C 48.34 55 47 56.34 47 58 L 47 104 C 47 105.66 48.34 107 50 107 C 51.66 107 53 105.66 53 104 L 53 58 C 53 56.34 51.66 55 50 55 z M 78 55 C 76.34 55 75 56.34 75 58 L 75 104 C 75 105.66 76.34 107 78 107 C 79.66 107 81 105.66 81 104 L 81 58 C 81 56.34 79.66 55 78 55 z">
+                  </path>
+                </svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/static/js/main.js?v=7"></script>
+</body>
+
+</html>
