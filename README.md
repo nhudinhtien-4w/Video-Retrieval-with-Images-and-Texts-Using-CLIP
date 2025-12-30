@@ -1,4 +1,4 @@
-﻿# IR-Phat - Video Information Retrieval System
+﻿# Video Information Retrieval System
 
 Hệ thống truy vấn thông tin video sử dụng kết hợp các công nghệ tiên tiến:
 - **CLIP (OpenAI/OpenCLIP)**: Trích xuất đặc trưng hình ảnh và văn bản.
