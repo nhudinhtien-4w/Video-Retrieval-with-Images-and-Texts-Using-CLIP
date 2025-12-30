@@ -37,4 +37,4 @@ Truy cập vào: http://localhost:8000
 
 ##  Notes
 - Hệ thống mặc định đang sử dụng CLIP ViT-L/14, nếu muốn sử dụng model khác, hãy tinh chỉnh trong file config.py.
-- Hệ thống được lên ý tưởng và cải tiến từ nguồn: https://github.com/chisngooo/Multimodal-Video-Retrieval-Engine-with-Vision-and-Text.git
+- Hệ thống tham khảo và cải tiến ý tưởng từ nguồn: https://github.com/chisngooo/Multimodal-Video-Retrieval-Engine-with-Vision-and-Text.git
